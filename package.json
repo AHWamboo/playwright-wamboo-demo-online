@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "play:run:test": "npx playwright test",
+    "play:ui": "npx playwright test  --ui",
     "prettier:check": "npx prettier --check .",
     "prettier:write": "npx prettier --write ."
   },
