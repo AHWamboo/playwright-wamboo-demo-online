@@ -8,5 +8,6 @@ export const topMainMenuSelectors = {
     },
     nav: {
         items: '#top-menu li',
+        itemsLinks: '#top-menu li a',
     },
 };
