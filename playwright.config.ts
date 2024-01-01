@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { defineConfig, devices } from '@playwright/test';
+import 'dotenv/config';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+const btoa = (str: string): string => Buffer.from(str).toString('base64');
+const APICredentials = {
+    admin: {
+        username: process.env.ADMIN_USERNAME,
+        password: process.env.ADMIN_API_PASSWORD,
+    },
+};
+const credentialsBase64 = btoa(`${APICredentials.admin.username}:${APICredentials.admin.password}`);
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
     testDir: './e2e/tests/',
     /* Run tests in files in parallel */
@@ -25,7 +26,9 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         baseURL: 'https://wamboo-demo.online/',
-
+        extraHTTPHeaders: {
+            Authorization: `Basic ${credentialsBase64}`,
+        },
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
     },

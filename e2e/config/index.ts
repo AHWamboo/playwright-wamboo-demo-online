@@ -1,1 +1,1 @@
-export * from './env-variables';
+export * from './test-options';

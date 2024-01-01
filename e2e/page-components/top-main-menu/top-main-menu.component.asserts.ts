@@ -1,7 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { topMainMenuSelectors } from './top-main-menu.component.selectors';
 import { NAV_ITEMS_URLS } from './top-main-menu.component.constants';
-import { BASE_URL } from '../../config';
 
 export class TopMainMenuAsserts {
     readonly page: Page;
@@ -25,14 +24,14 @@ export class TopMainMenuAsserts {
         }).toEqual(true);
     }
 
-    async verifyUrlPath(): Promise<void> {
+    async verifyUrlPath(urlPath: string): Promise<void> {
         for (const menuItem of NAV_ITEMS_URLS) {
             await this.page
                 .locator(topMainMenuSelectors.nav.itemsLinks)
                 .getByText(menuItem.name)
                 .click();
 
-            await expect(this.page).toHaveURL(`${BASE_URL}${menuItem.url}/`);
+            await expect(this.page).toHaveURL(`${urlPath}${menuItem.url}/`);
         }
     }
 }

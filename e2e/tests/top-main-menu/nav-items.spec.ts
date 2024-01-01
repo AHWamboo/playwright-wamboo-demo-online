@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from '../../config';
 import { TopMainMenuAsserts } from '../../page-components/top-main-menu';
 
 test.beforeEach(async ({ page }) => {
@@ -14,8 +14,9 @@ test.describe('Navigation elements of the top main menu - default behavior', () 
     });
     test('Each top main menu item should redirect to the page of your choice when you click on it', async ({
         page,
+        testBaseUrl,
     }) => {
         const topMainMenuAsserts: TopMainMenuAsserts = new TopMainMenuAsserts(page);
-        await topMainMenuAsserts.verifyUrlPath();
+        await topMainMenuAsserts.verifyUrlPath(testBaseUrl);
     });
 });
