@@ -136,3 +136,4 @@ dist
 # e2e
 /tests-examples
 /e2e/tests/test-trash.spec.ts
+/TODO.txt
