@@ -1,6 +1,5 @@
-import { type Locator, expect } from '@playwright/test';
 import { test } from '../../../config';
-import { wpAdminBarSelectors } from '../../../page-components/wordpress/wp-admin-bar';
+import { WpAdminBarAsserts } from '../../../page-components/wordpress/wp-admin-bar/wp-admin-bar.component.asserts';
 
 test.beforeEach(async ({ page, wordpressAdminPanelUrlSlug }) => {
     await page.goto(`${wordpressAdminPanelUrlSlug}`);
@@ -19,10 +18,10 @@ test.describe('Wordpress log in website - user log in options', () => {
             throw new Error('The environment variable USER_NAME must be defined and not empty');
         if (typeof userPassword === 'undefined')
             throw new Error('The environment variable USER_PASSWORD must be defined and not empty');
-        await adminPanelFormLogIn(userName, userPassword);
 
-        const adminBarHelpLink: Locator = page.locator(wpAdminBarSelectors.adminPanelHelpLink);
+        const wpAdminBarAsserts: WpAdminBarAsserts = new WpAdminBarAsserts(page);
+        await adminPanelFormLogIn(userName, userPassword);
         await page.waitForURL(`${baseURL}${wordpressAdminPanelUrlSlug}/`);
-        await expect(adminBarHelpLink).toBeVisible();
+        await wpAdminBarAsserts.verifyIfAdminBarHelpLinkIsVisible();
     });
 });
