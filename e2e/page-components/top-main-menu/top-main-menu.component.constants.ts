@@ -6,4 +6,5 @@ export const NAV_ITEMS_URLS = [
     { name: 'My account', url: '/my-account' },
     { name: 'Checkout', url: '/basket' },
     { name: 'Basket', url: '/basket' },
+    { name: 'Store contact', url: '/store-contact' },
 ];

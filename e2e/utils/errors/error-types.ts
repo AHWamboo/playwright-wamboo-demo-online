@@ -1,1 +1,1 @@
-export type ErrorName = 'MISSING_ENV_VARIABLE';
+export type ErrorName = 'MISSING_ENV_VARIABLE' | 'MISSING_PROJECT_VARIABLE';

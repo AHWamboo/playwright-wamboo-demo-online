@@ -4,15 +4,13 @@ import 'dotenv/config';
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type TestOptions = {
-    testBaseUrl: string;
-    wordpressAdminPanelUrlSlug: string;
     adminPanelFormLogIn: (useName: string, username: string) => Promise<void>;
     userName: string | undefined;
     userPassword: string | undefined;
+    wordpressAdminPanelUrlSlug: string;
 };
 
 export const test = base.extend<TestOptions>({
-    testBaseUrl: ['https://wamboo-demo.online', { option: true }],
     wordpressAdminPanelUrlSlug: ['/wp-admin', { option: true }],
     userName: [process.env.USER_NAME, { option: true }],
     userPassword: [process.env.USER_PASSWORD, { option: true }],
