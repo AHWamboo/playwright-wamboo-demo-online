@@ -1,6 +1,7 @@
 import { test } from '../../../config';
 import { WpAdminBarAsserts } from '../../../page-components/wordpress/wp-admin-bar/wp-admin-bar.component.asserts';
 import { WpLoginPageAsserts } from '../../../page-objects/wordpress/wp-login';
+import { BaseError } from '../../../utils/errors';
 
 test.beforeEach(async ({ page, wordpressAdminPanelUrlSlug }) => {
     await page.goto(`${wordpressAdminPanelUrlSlug}`);
@@ -31,7 +32,10 @@ test.describe('Wordpress log in website - user log in options', () => {
         userName,
     }) => {
         if (typeof userName === 'undefined')
-            throw new Error('The environment variable USER_NAME must be defined and not empty');
+            throw new BaseError({
+                errorName: 'MISSING_ENV_VARIABLE',
+                message: 'The environment variable USER_NAME must be defined and not empty',
+            });
 
         const wpLoginAsserts: WpLoginPageAsserts = new WpLoginPageAsserts(page);
         await adminPanelFormLogIn(userName, 'wrongPassword');
