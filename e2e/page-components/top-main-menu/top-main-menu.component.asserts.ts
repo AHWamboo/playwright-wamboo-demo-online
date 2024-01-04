@@ -18,18 +18,13 @@ export class TopMainMenuAsserts {
         );
 
         expect(allValuesMatch, {
-            message: `Elements of top main menu !== list of elements: \n${JSON.stringify(
-                navItemsLabels
-            )}`,
+            message: `Elements of top main menu !== list of elements: \n${JSON.stringify(navItemsLabels)}`,
         }).toEqual(true);
     }
 
     async verifyUrlPath(urlPath: string): Promise<void> {
         for (const menuItem of NAV_ITEMS_URLS) {
-            await this.page
-                .locator(topMainMenuSelectors.nav.itemsLinks)
-                .getByText(menuItem.name)
-                .click();
+            await this.page.locator(topMainMenuSelectors.nav.itemsLinks).getByText(menuItem.name).click();
 
             await expect(this.page).toHaveURL(`${urlPath}${menuItem.url}/`);
         }

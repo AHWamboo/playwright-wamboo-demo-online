@@ -7,9 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Navigation elements of the top main menu - default behavior', () => {
-    test('The top main menu should contain the appropriate number of items and their names', async ({
-        page,
-    }) => {
+    test('The top main menu should contain the appropriate number of items and their names', async ({ page }) => {
         const topMainMenuAsserts: TopMainMenuAsserts = new TopMainMenuAsserts(page);
         await topMainMenuAsserts.verifyNavItemsNames();
     });
