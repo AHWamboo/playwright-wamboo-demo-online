@@ -13,5 +13,6 @@ export const contactPageSelectors = {
             '.et_pb_contact_field select[data-original_id="which_product_category_interests_you_the_most?"]',
         submitButton: '.et_pb_contact_submit',
         successLabel: '.et-pb-contact-message p',
+        validationMessages: '.et-pb-contact-message ul li',
     },
 };

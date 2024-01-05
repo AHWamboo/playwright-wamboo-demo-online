@@ -1,5 +1,11 @@
 import { test } from '../../config';
-import { ContactPageActions, ContactPageAsserts, SUCCESS_LABEL } from '../../page-objects/contact';
+import {
+    ContactPageActions,
+    ContactPageAsserts,
+    FORM_VALIDATION_ERROR,
+    SUCCESS_LABEL,
+    contactPageSelectors,
+} from '../../page-objects/contact';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/store-contact');
@@ -23,5 +29,12 @@ test.describe('Sending emails from the contact page and validating the form', ()
             fevDropOption: 'Backpacks',
         });
         await contactPageAsserts.verifyContactFormLabel(SUCCESS_LABEL);
+    });
+    test('Contact form should display validation errors correctly when required fields are blank', async ({ page }) => {
+        const contactPageAsserts: ContactPageAsserts = new ContactPageAsserts(page);
+
+        await page.locator(contactPageSelectors.contactForm.submitButton).click();
+        await contactPageAsserts.verifyContactFormLabel(FORM_VALIDATION_ERROR.validationLabel);
+        await contactPageAsserts.verifyContactFormValidationMessages(FORM_VALIDATION_ERROR.validationMessages);
     });
 });
