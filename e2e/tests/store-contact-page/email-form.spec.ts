@@ -37,4 +37,7 @@ test.describe('Sending emails from the contact page and validating the form', ()
         await contactPageAsserts.verifyContactFormLabel(FORM_VALIDATION_ERROR.validationLabel);
         await contactPageAsserts.verifyContactFormValidationMessages(FORM_VALIDATION_ERROR.validationMessages);
     });
+    test('Contact form input fields should display a red validation box when submitted without all required fields', async ({
+        page,
+    }) => {});
 });
