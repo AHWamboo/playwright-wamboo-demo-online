@@ -1,5 +1,6 @@
 export const contactPageSelectors = {
     contactForm: {
+        form: '.et_pb_contact',
         nameInput: '#et_pb_contact_name_0',
         surnameInput: '#et_pb_contact_surname_0',
         emailInput: '#et_pb_contact_email_0',

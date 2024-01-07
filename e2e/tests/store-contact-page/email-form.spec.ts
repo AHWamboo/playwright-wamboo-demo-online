@@ -39,5 +39,8 @@ test.describe('Sending emails from the contact page and validating the form', ()
     });
     test('Contact form input fields should display a red validation box when submitted without all required fields', async ({
         page,
-    }) => {});
+    }) => {
+        const contactPageAsserts: ContactPageAsserts = new ContactPageAsserts(page);
+        await contactPageAsserts.verifyAppearanceOfFormWithAllRequiredDataMissing();
+    });
 });

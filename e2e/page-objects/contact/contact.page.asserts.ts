@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 import { contactPageSelectors } from './contact.page.selectors';
 
 export class ContactPageAsserts {
@@ -29,5 +29,12 @@ export class ContactPageAsserts {
                 expectedMessages
             )} \n !== \n contact form validation messages = ${JSON.stringify(formMessages)}`,
         }).toEqual(true);
+    }
+
+    async verifyAppearanceOfFormWithAllRequiredDataMissing(): Promise<void> {
+        await this.page.locator(contactPageSelectors.contactForm.submitButton).click();
+        const contactForm: Locator = this.page.locator(contactPageSelectors.contactForm.form);
+
+        await expect(contactForm).toHaveScreenshot({ maxDiffPixels: 10 });
     }
 }
