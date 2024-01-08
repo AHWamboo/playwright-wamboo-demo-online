@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "play:run:test": "npx playwright test",
+    "play:run:updateSnapshot": "npx playwright test --update-snapshots",
     "play:ui": "npx playwright test  --ui",
     "prettier:check": "npx prettier --check .",
     "prettier:write": "npx prettier --write ."
