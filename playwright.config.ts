@@ -5,8 +5,8 @@ import 'dotenv/config';
 const btoa = (str: string): string => Buffer.from(str).toString('base64');
 const APICredentials = {
     admin: {
-        username: process.env.ADMIN_USERNAME,
-        password: process.env.ADMIN_API_PASSWORD,
+        username: process.env.ADMIN_CONSUMER_KEY,
+        password: process.env.ADMIN_CONSUMER_SECRET,
     },
 };
 const credentialsBase64 = btoa(`${APICredentials.admin.username}:${APICredentials.admin.password}`);
