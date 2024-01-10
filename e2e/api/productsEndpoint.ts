@@ -1,4 +1,4 @@
-import { type Page } from '@playwright/test';
+import { type APIResponse, type Page } from '@playwright/test';
 
 export class ProductsEndpoint {
     page: Page;
@@ -10,10 +10,10 @@ export class ProductsEndpoint {
     }
 
     async getListOfAllProducts(options: any): Promise<any> {
-        const apiResponse = await this.page.request.get(this.endpoint, {
+        const apiResponse: APIResponse = await this.page.request.get(this.endpoint, {
             data: options,
         });
-        const categoryProducts = await apiResponse.json();
+        const categoryProducts: any = await apiResponse.json();
         return categoryProducts;
     }
 }
