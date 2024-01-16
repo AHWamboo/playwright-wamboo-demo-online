@@ -17,6 +17,8 @@ export const test = base.extend<TestOptions>({
 
     adminPanelFormLogIn: async ({ page }, use) => {
         await use(async (userName: string, userPassword: string) => {
+            await page.waitForSelector(wpLoginSelectors.loginForm.emailInput, { state: 'visible' });
+            await page.waitForSelector(wpLoginSelectors.loginForm.passwordInput, { state: 'visible' });
             await page.locator(wpLoginSelectors.loginForm.emailInput).fill(userName);
             await page.locator(wpLoginSelectors.loginForm.passwordInput).fill(userPassword);
             await page.locator(wpLoginSelectors.loginForm.submitButton).click();
