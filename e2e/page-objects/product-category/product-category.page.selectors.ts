@@ -6,4 +6,5 @@ export const productCategoryPageSelectors = {
         title: '.woocommerce-loop-product__title',
         price: '.amount',
     },
+    uncategorizedLabel: '.wc-block-components-notice-banner__content',
 };
