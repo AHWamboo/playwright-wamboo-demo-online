@@ -5,9 +5,9 @@ variables:
   GIT_STRATEGY: fetch
   GIT_CHECKOUT: "false"
 
-# before_script:
-  # - sudo apt-get update
-  # - sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
+before_script:
+  - apk update
+  - apk add mysql-client
 
 stages:          # List of stages for jobs, and their order of execution
   - database-setup
@@ -23,7 +23,7 @@ database-setup-job:       # This job runs in the build stage, which runs first.
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
   # image: mysql
-    # - mysql --version
+    - mysql --version
     # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
 create-file-job:       # This job runs in the build stage, which runs first.
