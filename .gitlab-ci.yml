@@ -1,6 +1,3 @@
-services:
-- mysql
-
 variables:
   GIT_STRATEGY: fetch
   GIT_CHECKOUT: "false"
@@ -33,6 +30,8 @@ decrypt-db-sql-file-job:
       - cypress-wamboo-demo-online-sql-dump
 
 run-db-backup-job:
+  services:
+    - mysql
   image: mysql
   stage: run-db-backup
   script:
