@@ -32,7 +32,6 @@ decrypt-db-sql-file-job:
 run-db-backup-job:
   services:
     - mysql
-  image: mysql
   stage: run-db-backup
   script:
     - cd cypress-wamboo-demo-online-sql-dump
