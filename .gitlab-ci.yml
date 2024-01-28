@@ -17,10 +17,17 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 stages:          # List of stages for jobs, and their order of execution
+  - database-setup
   - create-file
   - build
   - test
   - deploy
+
+database-setup:       # This job runs in the build stage, which runs first.
+  stage: create-file
+  script:
+    - mkdir db-repo
+    - ls
 
 create-file-job:       # This job runs in the build stage, which runs first.
   stage: create-file
