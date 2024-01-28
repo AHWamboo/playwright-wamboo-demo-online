@@ -3,14 +3,21 @@ variables:
   GIT_CHECKOUT: "false"
 
 stages:
+  - ubuntu-test
   - downloading-db
   - decrypt-db-sql-file
-  - ubuntu-test
   - run-db-backup
   - create-file
   - build
   - test
   - deploy
+
+ubuntu-test-job:
+  image: ubuntu:latest
+  stage: ubuntu-test
+  script:
+    - apt-get update
+    - apt-get install mysql-client
 
 downloading-db-job:
   stage: downloading-db
@@ -29,12 +36,6 @@ decrypt-db-sql-file-job:
   artifacts:
     paths:
       - cypress-wamboo-demo-online-sql-dump
-
-ubuntu-test-job:
-  image: ubuntu:latest
-  stage: ubuntu-test
-  script:
-    - apt-get update
 
 run-db-backup-job:
   services:
