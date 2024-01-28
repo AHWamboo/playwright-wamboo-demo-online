@@ -36,9 +36,7 @@ run-db-backup-job:
   stage: run-db-backup
   script:
     - cd cypress-wamboo-demo-online-sql-dump
-    - ls
-    - mysql --version
-    # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
+    - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
 create-file-job:       # This job runs in the build stage, which runs first.
   stage: create-file
