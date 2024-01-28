@@ -1,20 +1,12 @@
-services:
-  - mysql
-
 variables:
   GIT_STRATEGY: fetch
   GIT_CHECKOUT: "false"
-  MYSQL_DATABASE: hello_world_test
-  MYSQL_ROOT_PASSWORD: mysql
-  # MYSQL_USER: $db_user
-  # MYSQL_PASSWORD: $db_password
-  MYSQL_HOST: mysql
 
 # before_script:
 #   - apk update
 #   - apk add mysql-client
 
-stages:          # List of stages for jobs, and their order of execution
+stages:
   - database-setup
   - create-file
   - build
@@ -22,7 +14,6 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
 
 database-setup-job:
-  image: mysql
   stage: database-setup
   script:
     - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
