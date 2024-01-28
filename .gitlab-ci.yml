@@ -12,7 +12,7 @@ stages:          # List of stages for jobs, and their order of execution
 database-setup-job:       # This job runs in the build stage, which runs first.
   stage: database-setup
   script:
-    - git clone https://github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
+    - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
     - cd cypress-wamboo-demo-online-sql-dump | ls
 
 create-file-job:       # This job runs in the build stage, which runs first.
