@@ -2,13 +2,10 @@ variables:
   GIT_STRATEGY: fetch
   GIT_CHECKOUT: "false"
 
-# before_script:
-#   - apk update
-#   - apk add mysql-client
-
 stages:
   - downloading-db
   - decrypt-db-sql-file
+  - run-db-backup
   - create-file
   - build
   - test
@@ -27,6 +24,15 @@ decrypt-db-sql-file-job:
   script:
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
+  artifacts:
+    paths:
+      - cypress-wamboo-demo-online-sql-dump
+
+run-db-backup-job:
+  stage: run-db-backup
+  script:
+    - cd cypress-wamboo-demo-online-sql-dump
+    - ls
     # - mysql --version
     # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
