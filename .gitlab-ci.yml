@@ -5,6 +5,7 @@ variables:
 stages:
   - downloading-db
   - decrypt-db-sql-file
+  - ubuntu-test
   - run-db-backup
   - create-file
   - build
@@ -29,9 +30,16 @@ decrypt-db-sql-file-job:
     paths:
       - cypress-wamboo-demo-online-sql-dump
 
+ubuntu-test-job:
+  image: ubuntu:latest
+  stage: ubuntu-test
+  script:
+    - apt-get update
+
 run-db-backup-job:
   services:
     - mysql
+  image: mysql
   stage: run-db-backup
   script:
     - cd cypress-wamboo-demo-online-sql-dump
