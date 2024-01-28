@@ -3,7 +3,7 @@ variables:
   GIT_CHECKOUT: "false"
 
 stages:
-  - ubuntu-test
+  # - ubuntu-test
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
@@ -12,13 +12,13 @@ stages:
   - test
   - deploy
 
-ubuntu-test-job:
-  image: ubuntu:latest
-  stage: ubuntu-test
-  script:
-    - apt-get update
-    - apt-get -y install mysql-client
-    - mysql --version
+# ubuntu-test-job:
+#   image: ubuntu:latest
+#   stage: ubuntu-test
+#   script:
+#     - apt-get update
+#     - apt-get -y install mysql-client
+#     - mysql --version
 
 downloading-db-job:
   stage: downloading-db
@@ -39,11 +39,19 @@ decrypt-db-sql-file-job:
       - cypress-wamboo-demo-online-sql-dump
 
 run-db-backup-job:
-  services:
-    - mysql
-  image: mysql
+  # services:
+  #   - mysql
+  # image: mysql
+  # stage: run-db-backup
+  # script:
+  #   - cd cypress-wamboo-demo-online-sql-dump
+  #   - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
+  image: ubuntu:latest
   stage: run-db-backup
   script:
+    - apt-get update
+    - apt-get -y install mysql-client
+    - mysql --version
     - cd cypress-wamboo-demo-online-sql-dump
     - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
