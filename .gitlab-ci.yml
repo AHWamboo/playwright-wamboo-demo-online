@@ -17,7 +17,7 @@ ubuntu-test-job:
   stage: ubuntu-test
   script:
     - apt-get update
-    - apt-get install mysql-client
+    - apt-get -y install mysql-client
 
 downloading-db-job:
   stage: downloading-db
