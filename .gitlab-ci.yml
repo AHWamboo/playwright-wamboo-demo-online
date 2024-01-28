@@ -26,6 +26,7 @@ database-setup-job:       # This job runs in the build stage, which runs first.
 
 decrypt-db-dump-file-job:
   stage: decrypt-db-dump-file
+  script:
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
     # - apt-get update && apt-get install -y mysql-server mysql-client libmysqlclient-dev
