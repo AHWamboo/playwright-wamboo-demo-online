@@ -11,6 +11,7 @@ variables:
 
 stages:          # List of stages for jobs, and their order of execution
   - database-setup
+  - decrypt-db-dump-file
   - create-file
   - build
   - test
@@ -18,14 +19,17 @@ stages:          # List of stages for jobs, and their order of execution
 
 database-setup-job:       # This job runs in the build stage, which runs first.
   stage: database-setup
-  services:
-    - mysql
+  # services:
+  #   - mysql
   script:
     - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
+
+decrypt-db-dump-file-job:
+  stage: decrypt-db-dump-file
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
-    - apt-get update && apt-get install -y mysql-server mysql-client libmysqlclient-dev
-    - mysql --version
+    # - apt-get update && apt-get install -y mysql-server mysql-client libmysqlclient-dev
+    # - mysql --version
   # image: mysql
     # - mysql --version
     # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
