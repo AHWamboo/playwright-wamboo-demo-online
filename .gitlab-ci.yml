@@ -50,7 +50,7 @@ run-db-backup-job:
   stage: run-db-backup
   script:
     - apt-get update
-    - apt-get -y mysql-server mysql-client libmysqlclient-dev
+    - apt-get -y mysql-client libmysqlclient-dev
     - mysql --version
     - cd cypress-wamboo-demo-online-sql-dump
     - ls -la
