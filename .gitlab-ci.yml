@@ -7,18 +7,6 @@ stages:
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
-  - create-file
-  - build
-  - test
-  - deploy
-
-# ubuntu-test-job:
-#   image: ubuntu:latest
-#   stage: ubuntu-test
-#   script:
-#     - apt-get update
-#     - apt-get -y install mysql-client
-#     - mysql --version
 
 downloading-db-job:
   stage: downloading-db
@@ -33,60 +21,15 @@ decrypt-db-sql-file-job:
   script:
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
-    - ls -la
   artifacts:
     paths:
       - cypress-wamboo-demo-online-sql-dump
 
 run-db-backup-job:
-  # services:
-  #   - mysql
-  # image: mysql
-  # stage: run-db-backup
-  # script:
-  #   - cd cypress-wamboo-demo-online-sql-dump
-  #   - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
   image: ubuntu:latest
   stage: run-db-backup
   script:
     - apt-get update
     - apt-get install -y mysql-server mysql-client libmysqlclient-dev
-    - mysql --version
     - cd cypress-wamboo-demo-online-sql-dump
-    - ls -la
-    - find . -name db-backup.sql
-    # - mysql -h $db_host -u $db_user -p$db_password
     - mysql -h $db_host -u $db_user -p$db_password --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
-
-create-file-job:       # This job runs in the build stage, which runs first.
-  stage: create-file
-  script:
-    - mkdir aaa
-    - ls
-
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
-  script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
-
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Running unit tests... This will take about 9 seconds."
-    - sleep 9
-    - echo "Code coverage is 90%"
-
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
