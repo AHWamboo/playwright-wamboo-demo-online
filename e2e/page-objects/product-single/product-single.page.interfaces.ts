@@ -1,4 +1,4 @@
 export interface IProductSingleReview {
-    starRaiting: number;
+    starRaiting: 1 | 2 | 4 | 5;
     reviewText: string;
 }

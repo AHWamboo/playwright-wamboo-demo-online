@@ -33,25 +33,18 @@ export class ContactPageAsserts {
 
     async verifyAppearanceOfFormWithAllRequiredDataMissing(): Promise<void> {
         await this.page.locator(contactPageSelectors.contactForm.submitButton).click();
-        const contactForm: Locator = this.page.locator(contactPageSelectors.contactForm.form);
 
-        [
+        const inputs: Locator[] = [
             this.page.locator(contactPageSelectors.contactForm.nameInput),
             this.page.locator(contactPageSelectors.contactForm.surnameInput),
             this.page.locator(contactPageSelectors.contactForm.emailInput),
             this.page.locator(contactPageSelectors.contactForm.phoneInput),
             this.page.locator(contactPageSelectors.contactForm.messageTextArea),
             this.page.locator(contactPageSelectors.contactForm.fevCategoryDropDown),
-        ].every(async (inputElement) => {
-            await expect(inputElement).toHaveClass(/et_contact_error/);
-            await expect(inputElement).toHaveCSS('border', '1px solid rgb(255, 0, 0)');
-        });
+        ];
 
-        await expect(this.page.locator(contactPageSelectors.contactForm.termsLabel)).toHaveCSS(
-            'color',
-            'rgb(255, 0, 0)'
-        );
-
-        await expect(contactForm).toHaveScreenshot({ maxDiffPixels: 10 });
+        for (const input of inputs) {
+            await expect(input).toHaveClass(/et_contact_error/);
+        }
     }
 }

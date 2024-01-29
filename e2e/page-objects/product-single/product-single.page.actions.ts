@@ -8,11 +8,11 @@ export class ProductSinglePageActions {
         this.page = page;
     }
 
-    async addReviewToProduct(productReview: IProductSingleReview): Promise<void> {
+    async addReviewToProductForSignInUser(productReview: IProductSingleReview): Promise<void> {
         await this.page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
         await this.page
             .locator(productSinglePageSelectors.productTabs.reviews.stars)
-            .nth(productReview.starRaiting)
+            .nth(productReview.starRaiting - 1)
             .click();
         await this.page
             .locator(productSinglePageSelectors.productTabs.reviews.reviewCommentTextArea)
