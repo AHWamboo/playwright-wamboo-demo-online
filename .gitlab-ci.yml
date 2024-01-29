@@ -56,6 +56,8 @@ run-db-backup-job:
     - ls -la
     - find . -name db-backup.sql
     - mysql -h $db_host -u $db_user -p'$db_password'
+    - cd ~/var/log/mysql/
+    - ls -la
     # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
 create-file-job:       # This job runs in the build stage, which runs first.
