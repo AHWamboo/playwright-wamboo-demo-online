@@ -45,7 +45,6 @@ export class ContactPageAsserts {
 
         for (const input of inputs) {
             await expect(input).toHaveClass(/et_contact_error/);
-            // test e2e
         }
     }
 }
