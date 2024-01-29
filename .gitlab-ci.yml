@@ -3,7 +3,6 @@ variables:
   GIT_CHECKOUT: "false"
 
 stages:
-  # - ubuntu-test
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
@@ -39,4 +38,5 @@ execute-e2e-tests-job:
   stage: execute-e2e-tests
   image: mcr.microsoft.com/playwright:v1.41.1-jammy
   script:
+    - ls -la
     - npm run play:run:test
