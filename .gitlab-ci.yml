@@ -37,7 +37,11 @@ run-db-backup-job:
 execute-e2e-tests-job:
   stage: execute-e2e-tests
   image: mcr.microsoft.com/playwright:v1.41.1-jammy
-  script:
+  script: 
     - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
     - cd playwright-wamboo-demo-online
+    - ls -la
+    - ENCODED_STRING=$e2e_env_variables
+    - DECODED_STRING=$(echo "$ENCODED_STRING" | curl -G --data-urlencode @-)
+    - echo "$DECODED_STRING" > .env
     - ls -la
