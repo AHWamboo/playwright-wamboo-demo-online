@@ -7,6 +7,7 @@ stages:
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
+  - execute-e2e-tests
 
 downloading-db-job:
   stage: downloading-db
@@ -33,3 +34,9 @@ run-db-backup-job:
     - apt-get install -y mysql-server mysql-client libmysqlclient-dev
     - cd cypress-wamboo-demo-online-sql-dump
     - mysql -h $db_host -u $db_user -p$db_password --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
+
+execute-e2e-tests-job:
+  stage: execute-e2e-tests
+  image: mcr.microsoft.com/playwright:v1.41.1-jammy
+  script:
+    - npm run play:run:test
