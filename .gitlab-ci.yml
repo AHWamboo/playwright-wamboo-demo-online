@@ -54,6 +54,7 @@ run-db-backup-job:
     - mysql --version
     - cd cypress-wamboo-demo-online-sql-dump
     - ls -la
+    - find . -name db-backup.sql
     - mysql -h $db_host -u $db_user -p'$db_password'
     # - mysql -h $db_host -u $db_user -p'$db_password' --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
