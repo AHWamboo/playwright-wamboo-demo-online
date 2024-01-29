@@ -55,7 +55,7 @@ run-db-backup-job:
     - cd cypress-wamboo-demo-online-sql-dump
     - ls -la
     - find . -name db-backup.sql
-    - mysql -h $db_host -u $db_user -p'$db_password'
+    - mysql -h $db_host -u $db_user -p$db_password
   after_script:
     - cd ~/var/log/mysql/
     - ls -la
