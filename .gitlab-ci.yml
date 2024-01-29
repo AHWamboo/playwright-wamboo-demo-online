@@ -33,7 +33,7 @@ decrypt-db-sql-file-job:
   script:
     - cd cypress-wamboo-demo-online-sql-dump
     - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
-    - ls
+    - ls -la
   artifacts:
     paths:
       - cypress-wamboo-demo-online-sql-dump
