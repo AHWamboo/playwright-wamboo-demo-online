@@ -13,7 +13,7 @@ const credentialsBase64 = btoa(`${APICredentials.admin.username}:${APICredential
 
 export default defineConfig({
     testDir: './e2e/tests/',
-    /* Run tests in files in parallel */
+    /*  Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
     forbidOnly: !!process.env.CI,
