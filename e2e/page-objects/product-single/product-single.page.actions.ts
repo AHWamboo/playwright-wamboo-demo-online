@@ -1,5 +1,5 @@
-import { type Page } from '@playwright/test';
-import { type IProductSingleReview, productSinglePageSelectors } from '.';
+import { type Locator, type Page } from '@playwright/test';
+import { type IProductSingleReview, productSinglePageSelectors, type IApprovedProductSingleReview } from '.';
 
 export class ProductSinglePageActions {
     page: Page;
@@ -17,5 +17,29 @@ export class ProductSinglePageActions {
         await this.page
             .locator(productSinglePageSelectors.productTabs.reviews.reviewCommentTextArea)
             .fill(productReview.reviewText);
+        await this.page.locator(productSinglePageSelectors.productTabs.reviews.submitButton).click();
+    }
+
+    async getProductReviews(): Promise<IApprovedProductSingleReview[]> {
+        const allReviews: Locator[] = await this.page
+            .locator(productSinglePageSelectors.productTabs.reviews.raviewContainer)
+            .all();
+
+        const reviews: IApprovedProductSingleReview[] = [];
+        for (const review of allReviews) {
+            reviews.push({
+                starRaiting: await review
+                    .locator(productSinglePageSelectors.productTabs.reviews.starRating)
+                    .textContent(),
+                author: await review.locator(productSinglePageSelectors.productTabs.reviews.authorLabel).textContent(),
+                publishedDate: await review
+                    .locator(productSinglePageSelectors.productTabs.reviews.publishedDateLabel)
+                    .textContent(),
+                reviewText: await review
+                    .locator(productSinglePageSelectors.productTabs.reviews.reviewDescription)
+                    .textContent(),
+            });
+        }
+        return reviews;
     }
 }
