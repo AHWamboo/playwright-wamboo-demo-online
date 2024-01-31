@@ -1,40 +1,40 @@
 {
-  "name": "playwright-wamboo-demo-online",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "play:run:test": "npx playwright test",
-    "play:ui": "npx playwright test  --ui",
-    "prettier:check": "npx prettier --check .",
-    "prettier:write": "npx prettier --write ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AHWamboo/playwright-wamboo-demo-online.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AHWamboo/playwright-wamboo-demo-online/issues"
-  },
-  "homepage": "https://github.com/AHWamboo/playwright-wamboo-demo-online#readme",
-  "devDependencies": {
-    "@faker-js/faker": "^8.4.0",
-    "@playwright/test": "^1.40.1",
-    "@types/node": "^20.10.5",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-standard-with-typescript": "^40.0.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-n": "^16.3.1",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "dotenv": "^16.3.1"
-  }
+    "name": "playwright-wamboo-demo-online",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "play:run:test": "npx playwright test",
+        "play:ui": "npx playwright test  --ui",
+        "prettier:check": "npx prettier --check .",
+        "prettier:write": "npx prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AHWamboo/playwright-wamboo-demo-online.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AHWamboo/playwright-wamboo-demo-online/issues"
+    },
+    "homepage": "https://github.com/AHWamboo/playwright-wamboo-demo-online#readme",
+    "devDependencies": {
+        "@faker-js/faker": "^8.4.0",
+        "@playwright/test": "^1.40.1",
+        "@types/node": "^20.10.5",
+        "@typescript-eslint/eslint-plugin": "^6.13.1",
+        "eslint": "^8.54.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-config-standard-with-typescript": "^40.0.0",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-n": "^16.3.1",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-promise": "^6.1.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1"
+    }
 }
