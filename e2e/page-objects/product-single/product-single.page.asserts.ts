@@ -24,6 +24,6 @@ export class ProductSinglePageAsserts {
         });
         expect(ifReviewExist, {
             message: `verifyProductReview() - Product review: ${reviewsToVerify.reviewText} does not exist on single product page`,
-        }).toBe(true);
+        }).toEqual(true);
     }
 }
