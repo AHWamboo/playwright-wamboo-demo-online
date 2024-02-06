@@ -1,5 +1,5 @@
 export const shopPageSelectors = {
-    welcomeHeaderLocator: '.e2e-shop-welcome-header2',
+    welcomeHeaderLocator: '.e2e-shop-welcome-header',
     promoHeaderOne: {
         headerOne: '.e2e-promo-header-1-1',
         headerTwo: '.e2e-promo-header-1-2',

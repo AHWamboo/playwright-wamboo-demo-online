@@ -2,7 +2,7 @@ import { test } from '../../../config';
 import { WpAdminBarAsserts } from '../../../page-components/wordpress/wp-admin-bar/wp-admin-bar.component.asserts';
 import { WpLoginPageAsserts } from '../../../page-objects/wordpress/wp-login';
 import { BaseError } from '../../../utils/errors';
-// test commit a 1
+
 test.beforeEach(async ({ page, wordpressAdminPanelUrlSlug }) => {
     await page.goto(`${wordpressAdminPanelUrlSlug}`);
 });
@@ -38,7 +38,7 @@ test.describe('Wordpress log in website - user log in options', () => {
             });
 
         const wpLoginAsserts: WpLoginPageAsserts = new WpLoginPageAsserts(page);
-        await adminPanelFormLogIn(userName, 'wrongPassword');
+        await adminPanelFormLogIn(userName, 'wrongPassword 222');
         await wpLoginAsserts.verifyLoginErrorLabel(userName);
     });
 });
