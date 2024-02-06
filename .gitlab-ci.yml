@@ -42,7 +42,7 @@ run-db-backup-job:
 
 execute-e2e-tests-job:
   stage: execute-e2e-tests
-  image: mcr.microsoft.com/playwright:v1.41.2-jammy
+  image: mcr.microsoft.com/playwright:v1.40.2-jammy
   script: 
     - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
     - cd playwright-wamboo-demo-online
