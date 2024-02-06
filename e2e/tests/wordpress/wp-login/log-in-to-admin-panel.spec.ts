@@ -2,7 +2,7 @@ import { test } from '../../../config';
 import { WpAdminBarAsserts } from '../../../page-components/wordpress/wp-admin-bar/wp-admin-bar.component.asserts';
 import { WpLoginPageAsserts } from '../../../page-objects/wordpress/wp-login';
 import { BaseError } from '../../../utils/errors';
-// test commit
+// test commit a
 test.beforeEach(async ({ page, wordpressAdminPanelUrlSlug }) => {
     await page.goto(`${wordpressAdminPanelUrlSlug}`);
 });
