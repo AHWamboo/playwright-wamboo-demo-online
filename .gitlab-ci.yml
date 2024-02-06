@@ -52,5 +52,6 @@ execute-e2e-tests-job:
     - echo "$DECODED_STRING" > .env
     - npm run play:run:test
   artifacts:
+    when: on_failure
     paths:
-      - test-results/
+      - test-results
