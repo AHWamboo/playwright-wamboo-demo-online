@@ -51,3 +51,6 @@ execute-e2e-tests-job:
     - DECODED_STRING=$(printf '%b' "$(echo "$ENCODED_STRING" | sed 's/+/ /g;s/%/\\x/g')")
     - echo "$DECODED_STRING" > .env
     - npm run play:run:test
+  artifacts:
+    paths:
+      - test-results/
