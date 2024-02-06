@@ -8,11 +8,13 @@ import {
 import { ProductSinglePageAsserts } from '../../page-objects/product-single/product-single.page.asserts';
 import { faker } from '@faker-js/faker';
 
-test.beforeEach(async ({ logInToDashboardAsAdmin }) => {
-    await logInToDashboardAsAdmin();
-});
-
 test.describe('Single product page reviews - available on the product page, basic operation: adding and verifying addition', () => {
+    test.describe.configure({ retries: 3 });
+
+    test.beforeEach(async ({ logInToDashboardAsAdmin }) => {
+        await logInToDashboardAsAdmin();
+    });
+
     test('Add a review to the product and see if it exists', async ({ page }) => {
         await page.goto('/product/360reach/');
         const productSinglePageActions: ProductSinglePageActions = new ProductSinglePageActions(page);

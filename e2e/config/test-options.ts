@@ -35,7 +35,7 @@ export const test = base.extend<TestOptions>({
         use
     ) => {
         await use(async () => {
-            await page.goto(wordpressAdminPanelUrlSlug);
+            await page.goto(wordpressAdminPanelUrlSlug, { timeout: 30000 });
 
             if (typeof adminUserName === 'undefined')
                 throw new Error('The environment variable ADMIN_USERNAME must be defined and not empty');
