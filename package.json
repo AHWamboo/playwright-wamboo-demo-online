@@ -22,7 +22,7 @@
     "homepage": "https://github.com/AHWamboo/playwright-wamboo-demo-online#readme",
     "devDependencies": {
         "@faker-js/faker": "^8.4.0",
-        "@playwright/test": "^1.40.1",
+        "@playwright/test": "^1.41.2",
         "@types/node": "^20.10.5",
         "@typescript-eslint/eslint-plugin": "^6.13.1",
         "eslint": "^8.54.0",
