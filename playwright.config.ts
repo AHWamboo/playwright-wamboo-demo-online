@@ -12,7 +12,7 @@ const APICredentials = {
 const credentialsBase64 = btoa(`${APICredentials.admin.username}:${APICredentials.admin.password}`);
 
 export default defineConfig({
-    timeout: 1 * 60 * 1000,
+    timeout: 30000,
     testDir: './e2e/tests/',
     /*  Run tests in files in parallel */
     fullyParallel: true,
