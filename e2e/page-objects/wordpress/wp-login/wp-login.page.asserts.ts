@@ -12,6 +12,6 @@ export class WpLoginPageAsserts {
         const erroLabel: string | null = await this.page
             .locator(wpLoginSelectors.loginForm.loginErrorLabel)
             .textContent();
-        expect(erroLabel).toContain(userName + 'a');
+        expect(erroLabel).toContain(userName);
     }
 }

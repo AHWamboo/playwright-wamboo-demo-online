@@ -46,7 +46,6 @@ execute-e2e-tests-job:
   script: 
     - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
     - cd playwright-wamboo-demo-online
-    - ls
     - npm ci
     - ENCODED_STRING=$e2e_env_variables
     - DECODED_STRING=$(printf '%b' "$(echo "$ENCODED_STRING" | sed 's/+/ /g;s/%/\\x/g')")
