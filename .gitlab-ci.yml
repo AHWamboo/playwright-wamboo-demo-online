@@ -44,7 +44,9 @@ execute-e2e-tests-job:
   stage: execute-e2e-tests
   image: mcr.microsoft.com/playwright:v1.41.2-jammy
   script: 
-    - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
+    # - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
+    - pwd
+    - ls
     - cd playwright-wamboo-demo-online
     - npm ci
     - ENCODED_STRING=$e2e_env_variables
