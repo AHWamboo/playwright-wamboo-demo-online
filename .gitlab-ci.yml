@@ -9,10 +9,16 @@ variables:
   GIT_CHECKOUT: "false"
 
 stages:
+  - see-initial-status
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
   - execute-e2e-tests
+
+see-initial-status-job:
+  stage: see-initial-status
+  script:
+    - ls
 
 downloading-db-job:
   stage: downloading-db
