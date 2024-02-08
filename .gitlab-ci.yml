@@ -9,19 +9,10 @@ variables:
   GIT_CHECKOUT: "false"
 
 stages:
-  - see-initial-status
   - downloading-db
   - decrypt-db-sql-file
   - run-db-backup
   - execute-e2e-tests
-
-see-initial-status-job:
-  stage: see-initial-status
-  script:
-    - git pull
-    - ls
-    - git clone git@gitlab.com:AHWamboo/playwright-wamboo-demo-online.git
-    - ls
 
 downloading-db-job:
   stage: downloading-db
@@ -53,9 +44,7 @@ execute-e2e-tests-job:
   stage: execute-e2e-tests
   image: mcr.microsoft.com/playwright:v1.41.2-jammy
   script: 
-    # - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
-    - pwd
-    - ls
+    - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
     - cd playwright-wamboo-demo-online
     - npm ci
     - ENCODED_STRING=$e2e_env_variables
