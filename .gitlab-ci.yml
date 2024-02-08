@@ -18,6 +18,9 @@ stages:
 see-initial-status-job:
   stage: see-initial-status
   script:
+    - git pull
+    - ls
+    - git clone git@gitlab.com:AHWamboo/playwright-wamboo-demo-online.git
     - ls
 
 downloading-db-job:
