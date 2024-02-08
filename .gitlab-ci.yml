@@ -55,4 +55,4 @@ execute-e2e-tests-job:
   artifacts:
     when: on_failure
     paths:
-      - test-results
+      - playwright-wamboo-demo-online/test-results
