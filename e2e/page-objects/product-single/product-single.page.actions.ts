@@ -18,7 +18,7 @@ export class ProductSinglePageActions {
             .locator(productSinglePageSelectors.productTabs.reviews.reviewCommentTextArea)
             .fill(productReview.reviewText);
         const requestPromise = this.page.waitForResponse(
-            (response) => response.url().includes('/360reach/') && response.status() === 200
+            (response) => response.url().includes('/grippro/') && response.status() === 200
         );
         await this.page.locator(productSinglePageSelectors.productTabs.reviews.submitButton).click();
         await requestPromise;

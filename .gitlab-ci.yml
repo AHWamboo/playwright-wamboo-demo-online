@@ -1,57 +1,57 @@
 workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+          when: always
+        - when: never
 
 variables:
-  GIT_STRATEGY: fetch
-  GIT_CHECKOUT: "false"
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: 'false'
 
 stages:
-  - downloading-db
-  - decrypt-db-sql-file
-  - run-db-backup
-  - execute-e2e-tests
+    - downloading-db
+    - decrypt-db-sql-file
+    - run-db-backup
+    - execute-e2e-tests
 
 downloading-db-job:
-  stage: downloading-db
-  script:
-    - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
-  artifacts:
-    paths:
-      - cypress-wamboo-demo-online-sql-dump
+    stage: downloading-db
+    script:
+        - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/cypress-wamboo-demo-online-sql-dump.git
+    artifacts:
+        paths:
+            - cypress-wamboo-demo-online-sql-dump
 
 decrypt-db-sql-file-job:
-  stage: decrypt-db-sql-file
-  script:
-    - cd cypress-wamboo-demo-online-sql-dump
-    - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
-  artifacts:
-    paths:
-      - cypress-wamboo-demo-online-sql-dump
+    stage: decrypt-db-sql-file
+    script:
+        - cd cypress-wamboo-demo-online-sql-dump
+        - gpg --batch --decrypt --cipher-algo AES256 --pinentry-mode loopback --passphrase "$gpg_passphrase" --output db-backup.sql db-backup.sql.gpg
+    artifacts:
+        paths:
+            - cypress-wamboo-demo-online-sql-dump
 
 run-db-backup-job:
-  image: ubuntu:latest
-  stage: run-db-backup
-  script:
-    - apt-get update
-    - apt-get install -y mysql-server mysql-client libmysqlclient-dev
-    - cd cypress-wamboo-demo-online-sql-dump
-    - mysql -h $db_host -u $db_user -p$db_password --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
+    image: ubuntu:latest
+    stage: run-db-backup
+    script:
+        - apt-get update
+        - apt-get install -y mysql-server mysql-client libmysqlclient-dev
+        - cd cypress-wamboo-demo-online-sql-dump
+        - mysql -h $db_host -u $db_user -p$db_password --max_allowed_packet=256M -D $db_name --force < $db_backup_file;
 
 execute-e2e-tests-job:
-  stage: execute-e2e-tests
-  image: mcr.microsoft.com/playwright:v1.41.2-jammy
-  script: 
-    - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
-    - cd playwright-wamboo-demo-online
-    - npm ci
-    - ENCODED_STRING=$e2e_env_variables
-    - DECODED_STRING=$(printf '%b' "$(echo "$ENCODED_STRING" | sed 's/+/ /g;s/%/\\x/g')")
-    - echo "$DECODED_STRING" > .env
-    - npm run play:run:test
-  artifacts:
-    when: on_failure
-    paths:
-      - playwright-wamboo-demo-online/test-results
+    stage: execute-e2e-tests
+    image: mcr.microsoft.com/playwright:v1.41.2-jammy
+    script:
+        - git clone https://$github_user_name:$github_access_token_to_mysql_database_dump@github.com/AHWamboo/playwright-wamboo-demo-online.git
+        - cd playwright-wamboo-demo-online
+        - npm ci
+        - ENCODED_STRING=$e2e_env_variables
+        - DECODED_STRING=$(printf '%b' "$(echo "$ENCODED_STRING" | sed 's/+/ /g;s/%/\\x/g')")
+        - echo "$DECODED_STRING" > .env
+        - npm run play:run:test
+    artifacts:
+        when: on_failure
+        paths:
+            - playwright-wamboo-demo-online/test-results

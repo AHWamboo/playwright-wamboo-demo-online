@@ -15,4 +15,10 @@ export const productSinglePageSelectors = {
             reviewDescription: '.description p',
         },
     },
+    productSummary: {
+        productRating: {
+            stars: '.woocommerce-product-rating .star-rating strong.rating',
+            link: '.woocommerce-review-link .count',
+        },
+    },
 };

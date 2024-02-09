@@ -15,12 +15,14 @@ test.describe('Single product page reviews - available on the product page, basi
         await logInToDashboardAsAdmin();
     });
 
-    test('Add a review to the product and see if it exists', async ({ page }) => {
-        await page.goto('/product/360reach/');
+    test('Add a review to the product and see if it exists in the lower review tab and in the product under the title', async ({
+        page,
+    }) => {
+        await page.goto('/product/grippro/');
         const productSinglePageActions: ProductSinglePageActions = new ProductSinglePageActions(page);
         const productSinglePageAsserts: ProductSinglePageAsserts = new ProductSinglePageAsserts(page);
         const productReview: IProductSingleReview = {
-            starRaiting: faker.number.int({ min: 1, max: 5 }) as 1 | 2 | 3 | 4 | 5,
+            starRaiting: 4,
             reviewText: `e2e review ${faker.number.int({ min: 1, max: 1000 })}`,
         };
 
@@ -31,6 +33,10 @@ test.describe('Single product page reviews - available on the product page, basi
         await page.waitForSelector(productSinglePageSelectors.productTabs.reviews.authorLabel, { state: 'visible' });
 
         const productReviews: IApprovedProductSingleReview[] = await productSinglePageActions.getProductReviews();
-        await productSinglePageAsserts.verifyProductReview(productReviews, productReview);
+        await productSinglePageAsserts.verifyProductReviewInLowerReviewTab(productReviews, productReview);
+        await productSinglePageAsserts.verifyProductReviewStarsUnderProductTitle({
+            starCounter: '4.00',
+            linkCounter: productReviews.length,
+        });
     });
 });
