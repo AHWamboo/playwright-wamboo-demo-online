@@ -24,11 +24,13 @@ test.describe('Single product page reviews - available on the product page, basi
         const productReview: IProductSingleReview = {
             starRaiting: 4,
             reviewText: `e2e review ${faker.number.int({ min: 1, max: 1000 })}`,
+            productSlug: '/grippro',
         };
 
         await productSinglePageActions.addReviewToProductForSignInUser({
             starRaiting: productReview.starRaiting,
             reviewText: productReview.reviewText,
+            productSlug: productReview.productSlug,
         });
         await page.waitForSelector(productSinglePageSelectors.productTabs.reviews.authorLabel, { state: 'visible' });
 

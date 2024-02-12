@@ -23,4 +23,8 @@ export class ProductCategoryPageAsserts {
 
         await expect(noProductsLabel).toContainText(EMPTY_PRODUCT_CATEGORY_LABEL);
     }
+
+    verifySingleProductStarReviewRaiting(expectedStarCounter: string, starCounterToVerify: string): void {
+        expect(expectedStarCounter).toEqual(starCounterToVerify);
+    }
 }

@@ -19,9 +19,27 @@ export class ProductCategoryPageActions {
             productCategoryObjects.push({
                 image: product.locator(productCategoryPageSelectors.product.image),
                 title: await product.locator(productCategoryPageSelectors.product.title).textContent(),
+                reviewStars:
+                    (await product.locator(productCategoryPageSelectors.product.starRating).textContent()) ?? null,
                 price: await product.locator(productCategoryPageSelectors.product.price).textContent(),
             });
         }
         return productCategoryObjects;
+    }
+
+    async getSingleVisibleProductContentByItsName(productName: string): Promise<ISingleCategoryProduct> {
+        const singleProductContent: Locator = this.page.locator(productCategoryPageSelectors.product.listLink, {
+            hasText: productName,
+        });
+
+        const singleCategoryProductDetails: ISingleCategoryProduct = {
+            image: singleProductContent.locator(productCategoryPageSelectors.product.image),
+            title: await singleProductContent.locator(productCategoryPageSelectors.product.title).textContent(),
+            reviewStars: await singleProductContent
+                .locator(productCategoryPageSelectors.product.starRating)
+                .textContent(),
+            price: await singleProductContent.locator(productCategoryPageSelectors.product.price).textContent(),
+        };
+        return singleCategoryProductDetails;
     }
 }

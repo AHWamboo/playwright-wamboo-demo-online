@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Store promotional headlines should match seson', () => {
-    test('The headings for: main header and two promotional cameras should have the correct values.', async ({
+    test('The headings for: main header and two promotional cameras should have the correct values', async ({
         page,
     }) => {
         const shopPageAsserts: ShopPageAsserts = new ShopPageAsserts(page);
