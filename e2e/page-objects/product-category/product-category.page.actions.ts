@@ -19,11 +19,11 @@ export class ProductCategoryPageActions {
             productCategoryObjects.push({
                 image: product.locator(productCategoryPageSelectors.product.image),
                 title: await product.locator(productCategoryPageSelectors.product.title).textContent(),
-                reviewStars:
-                    (await product.locator(productCategoryPageSelectors.product.starRating).textContent()) ?? null,
+                reviewStars: await this.checkIfStarReviewHTMLExists(product),
                 price: await product.locator(productCategoryPageSelectors.product.price).textContent(),
             });
         }
+
         return productCategoryObjects;
     }
 
@@ -35,11 +35,17 @@ export class ProductCategoryPageActions {
         const singleCategoryProductDetails: ISingleCategoryProduct = {
             image: singleProductContent.locator(productCategoryPageSelectors.product.image),
             title: await singleProductContent.locator(productCategoryPageSelectors.product.title).textContent(),
-            reviewStars: await singleProductContent
-                .locator(productCategoryPageSelectors.product.starRating)
-                .textContent(),
+            reviewStars: await this.checkIfStarReviewHTMLExists(singleProductContent),
             price: await singleProductContent.locator(productCategoryPageSelectors.product.price).textContent(),
         };
         return singleCategoryProductDetails;
+    }
+
+    async checkIfStarReviewHTMLExists(starLocator: Locator): Promise<string | null> {
+        const starRatingLocator: Locator = starLocator.locator(productCategoryPageSelectors.product.starRating);
+        const starRaitingValue: string | null = (await starRatingLocator.isVisible())
+            ? await starRatingLocator.textContent()
+            : null;
+        return starRaitingValue;
     }
 }
