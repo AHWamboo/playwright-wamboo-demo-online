@@ -41,4 +41,11 @@ test.describe('Single product page reviews - available on the product page, basi
             linkCounter: productReviews.length,
         });
     });
+
+    test('The empty Review tab should contain the appropriate label and description', async ({ page }) => {
+        await page.goto('/product/elevate-tech-stand/');
+        await page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
+        const productSinglePageAsserts: ProductSinglePageAsserts = new ProductSinglePageAsserts(page);
+        await productSinglePageAsserts.verifyEmptyReviewTabLabel();
+    });
 });

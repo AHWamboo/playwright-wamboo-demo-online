@@ -13,6 +13,8 @@ export const productSinglePageSelectors = {
             authorLabel: '.woocommerce-review__author',
             publishedDateLabel: '.woocommerce-review__published-date',
             reviewDescription: '.description p',
+            // empty review
+            noReviewsLabel: '.woocommerce-noreviews',
         },
     },
     productSummary: {
