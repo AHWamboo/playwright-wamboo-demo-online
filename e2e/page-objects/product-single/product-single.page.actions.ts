@@ -10,18 +10,23 @@ export class ProductSinglePageActions {
 
     async addReviewToProductForSignInUser(productReview: IProductSingleReview): Promise<void> {
         await this.page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
-        await this.page
-            .locator(productSinglePageSelectors.productTabs.reviews.stars)
-            .nth(productReview.starRaiting - 1)
-            .click();
+        if (productReview.starRaiting !== null)
+            await this.page
+                .locator(productSinglePageSelectors.productTabs.reviews.stars)
+                .nth(productReview.starRaiting - 1)
+                .click();
         await this.page
             .locator(productSinglePageSelectors.productTabs.reviews.reviewCommentTextArea)
-            .fill(productReview.reviewText);
-        const requestPromise = this.page.waitForResponse(
-            (response) => response.url().includes(productReview.productSlug) && response.status() === 200
-        );
-        await this.page.locator(productSinglePageSelectors.productTabs.reviews.submitButton).click();
-        await requestPromise;
+            .fill(productReview.reviewText ?? '');
+        if (productReview.productSlug !== null) {
+            const requestPromise = this.page.waitForResponse(
+                (response) => response.url().includes(productReview.productSlug ?? '') && response.status() === 200
+            );
+            await this.page.locator(productSinglePageSelectors.productTabs.reviews.submitButton).click();
+            await requestPromise;
+        } else {
+            await this.page.locator(productSinglePageSelectors.productTabs.reviews.submitButton).click();
+        }
     }
 
     async getProductReviews(): Promise<IApprovedProductSingleReview[]> {

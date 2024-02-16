@@ -1,7 +1,7 @@
 export interface IProductSingleReview {
-    starRaiting: 1 | 2 | 3 | 4 | 5;
-    reviewText: string;
-    productSlug: string;
+    starRaiting: 1 | 2 | 3 | 4 | 5 | null;
+    reviewText?: string;
+    productSlug: string | null;
 }
 
 export interface IApprovedProductSingleReview {

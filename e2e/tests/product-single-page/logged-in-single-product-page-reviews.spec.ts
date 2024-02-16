@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 import { test } from '../../config';
 import {
     productSinglePageSelectors,
@@ -47,5 +48,22 @@ test.describe('Single product page reviews - available on the product page, basi
         await page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
         const productSinglePageAsserts: ProductSinglePageAsserts = new ProductSinglePageAsserts(page);
         await productSinglePageAsserts.verifyEmptyReviewTabLabel();
+    });
+
+    test('Placing a review text and not selecting a star should trigger an alert window', async ({ page }) => {
+        await page.goto('/product/ergoview/');
+        await page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
+
+        const productSinglePageActions: ProductSinglePageActions = new ProductSinglePageActions(page);
+        await productSinglePageActions.addReviewToProductForSignInUser({
+            starRaiting: null,
+            reviewText: `e2e review ${faker.number.int({ min: 1, max: 1000 })}`,
+            productSlug: null,
+        });
+
+        page.on('dialog', (dialog) => {
+            expect(dialog.message()).toEqual('Please select a rating');
+            void dialog.accept();
+        });
     });
 });
