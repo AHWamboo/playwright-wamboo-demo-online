@@ -55,15 +55,17 @@ test.describe('Single product page reviews - available on the product page, basi
         await page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
 
         const productSinglePageActions: ProductSinglePageActions = new ProductSinglePageActions(page);
+        const productSinglePageAsserts: ProductSinglePageAsserts = new ProductSinglePageAsserts(page);
+
+        page.on('dialog', (dialog) => {
+            productSinglePageAsserts.verifyEmptyStarRatingDialogLabel(dialog);
+            void dialog.accept();
+        });
+
         await productSinglePageActions.addReviewToProductForSignInUser({
             starRaiting: null,
             reviewText: `e2e review ${faker.number.int({ min: 1, max: 1000 })}`,
             productSlug: null,
-        });
-
-        page.on('dialog', (dialog) => {
-            expect(dialog.message()).toEqual('Please select a rating');
-            void dialog.accept();
         });
     });
 });

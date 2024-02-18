@@ -1,14 +1,18 @@
-import { expect, type Page } from '@playwright/test';
+import { type Dialog, expect, type Page } from '@playwright/test';
 import { type IProductSingleReview, type IApprovedProductSingleReview } from './product-single.page.interfaces';
 import { getFormattedCurrentDate } from '../../utils/helpers/dates-and-time';
 import { productSinglePageSelectors } from './product-single.page.selectors';
-import { EMPTY_REVIEW_LABEL } from './product-single.page.constants';
+import { EMPTY_REVIEW_LABEL, EMPTY_STAR_RATING_DIALOG } from './product-single.page.constants';
 
 export class ProductSinglePageAsserts {
     page: Page;
 
     constructor(page: Page) {
         this.page = page;
+    }
+
+    verifyEmptyStarRatingDialogLabel(dialog: Dialog): void {
+        expect(dialog.message()).toEqual(EMPTY_STAR_RATING_DIALOG);
     }
 
     async verifyProductReviewInLowerReviewTab(
