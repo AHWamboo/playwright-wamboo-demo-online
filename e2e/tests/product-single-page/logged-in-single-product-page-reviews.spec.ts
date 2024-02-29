@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import { test } from '../../config';
 import {
     productSinglePageSelectors,
@@ -67,5 +66,21 @@ test.describe('Single product page reviews - available on the product page, basi
             reviewText: `e2e review ${faker.number.int({ min: 1, max: 1000 })}`,
             productSlug: null,
         });
+    });
+
+    test('Placing a star and not writing a review text should redirect to a page with a message', async ({ page }) => {
+        await page.goto('/product/ergoview/');
+        await page.locator(productSinglePageSelectors.productTabs.reviews.tabTitleLabel).click();
+
+        const productSinglePageActions: ProductSinglePageActions = new ProductSinglePageActions(page);
+        const productSinglePageAsserts: ProductSinglePageAsserts = new ProductSinglePageAsserts(page);
+
+        await productSinglePageActions.addReviewToProductForSignInUser({
+            starRaiting: 3,
+            reviewText: undefined,
+            productSlug: null,
+        });
+
+        await productSinglePageAsserts.verifyEmptyReviewTextMessage();
     });
 });
